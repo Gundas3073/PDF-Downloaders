@@ -3,7 +3,7 @@ import urllib2
 def main():
 	global count
 	count = 0	
-	for n in range(5500,6000):    
+	for n in range(0,6000):    
 		global test 
 		test = n		
 		download_file("http://www.freeinfosociety.com/media/pdf/" + str(n) + ".pdf")
