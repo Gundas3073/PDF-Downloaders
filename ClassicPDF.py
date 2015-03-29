@@ -7,18 +7,35 @@ def main():
     print "Done"
     for testURL in search_list:
         list = []
-        list = FSRL('http://www.freeclassicebooks.com/'+testURL+".htm",".pdf\">pdf</a>] ","[<a href=\"", 80 )
+        list = FSRL('http://www.freeclassicebooks.com/'+testURL+".htm",".pdf\">pdf</a>] ","[<a href=\"", 120 )
         list = [term.replace('_','%20') for term in list]
-        print list
-        global n
+        global j
         for n in list:
             t = t+1
             n = n[1:]
-            download_file(r"http://www.freeclassicebooks.com/" + n + ".pdf") 
+            l = n
+            j = change(n)
+            download_file(r"http://www.freeclassicebooks.com/" + l + ".pdf") 
+            
     
         
     
-        
+def change(name):
+    for num in range(1,5):
+        a = name.find("\\", 0 , len(name))
+        if a != -1:
+            name = name[a+1:]
+            name = name.replace("%20", "_")
+        else:
+            name = name.replace("%20", "_")
+    for num in range(1,5):
+        a = name.find("/", 0 , len(name))
+        if a != -1:
+            name = name[a+1:]
+            name = name.replace(" ", "_")
+        else:
+            name = name.replace(" ", "_")
+    return name
 	
         
 def FSRL(url, beg, beg2, testlength): # Finds String from HTML, Returns List
@@ -61,11 +78,10 @@ def download_file(download_url):
 	try:
 		# Used to make sure no errors w/ HTTP request (AKA 404 Error trolls)		
 		response = urllib2.urlopen(download_url)
-		file = open(str(t)+".pdf", 'wb')
+		file = open(j + " .pdf", 'wb')
 		file.write(response.read())
 		file.close()
-		print("Completed")
 	except:
-		print n + " is not present"
+		print j + " is not present"
 if __name__ == "__main__":
     main()
