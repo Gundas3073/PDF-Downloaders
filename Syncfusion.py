@@ -40,6 +40,7 @@ def test():
             item = item[1:]
         item = item.replace(" ", "_")
         item = item.replace("#", "_Sharp")
+        item = item.replace("C++", "Cplusplus")
         updated_list.append( item + "Succinctly")        
 
 def download_file(download_url):
